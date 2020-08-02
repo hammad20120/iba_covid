@@ -9,9 +9,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
     private Button btnLst;
     private Button btnDash;
+    private Button btnLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +28,14 @@ public class MainActivity extends AppCompatActivity {
         });
 
         btnDash = (Button)findViewById(R.id.button2);
+        btnDash.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openDashboardActivity();
+            }
+        });
+
+        btnLogin = (Button)findViewById(R.id.btn_login);
         btnDash.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
