@@ -10,6 +10,7 @@
         android:id="@+id/register_heading_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:text="Register"
         android:textColor="#FFFFFF"
         android:textSize="30sp"
@@ -40,7 +41,7 @@
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:inputType="text"
-            android:textSize="22sp" />
+            android:textSize="18sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -63,7 +64,7 @@
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:inputType="textEmailAddress"
-            android:textSize="22sp" />
+            android:textSize="18sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -86,7 +87,7 @@
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:inputType="textPassword"
-            android:textSize="22sp" />
+            android:textSize="18sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -107,10 +108,40 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="none"
-            android:textSize="22sp">
+            android:textSize="18sp">
 
         </AutoCompleteTextView>
     </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/register_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="60dp"
+        android:text="Regsiter"
+        android:padding="15dp"
+        android:textStyle="bold"
+        app:cornerRadius="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/register_role_layout" />
+
+    <TextView
+        android:id="@+id/loginText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Already have an account?\nClick here to login"
+        android:textColor="#FFFFFF"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/register_btn"
+        app:layout_constraintVertical_bias="0.29000002" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

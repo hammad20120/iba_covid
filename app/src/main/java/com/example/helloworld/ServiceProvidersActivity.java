@@ -35,10 +35,6 @@ public class ServiceProvidersActivity extends AppCompatActivity {
 
 
 
-
-
-        getSupportActionBar().setTitle("Medical Facilities");
-
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(getResources().getString(R.string.server_url))
                 .addConverterFactory(GsonConverterFactory.create())

@@ -1,18 +1,33 @@
 package com.example.helloworld;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import org.json.JSONObject;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class LoginFragment extends Fragment {
+    private Button loginButton;
 
     @Nullable
     @Override
@@ -24,6 +39,7 @@ public class LoginFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         TextView registerText = (TextView) view.findViewById(R.id.registerText);
+        loginButton = view.findViewById(R.id.loginbtn);
 
         registerText.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,5 +50,68 @@ public class LoginFragment extends Fragment {
                 ft.commit();
             }
         });
+
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loginUser();
+            }
+        });
+    }
+
+    private void loginUser(){
+        EditText email = getView().findViewById(R.id.login_email);
+        EditText password = getView().findViewById(R.id.login_password);
+
+        User user = new User(null,email.getText().toString(), password.getText().toString(), -1);
+
+
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(getResources().getString(R.string.server_url))
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        RetrofitInterface retInterface = retrofit.create(RetrofitInterface.class);
+        Call<ResponseBody> call = retInterface.login(user);
+
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if(response.isSuccessful()){
+
+                    try{
+                        JSONObject json = new JSONObject(response.body().string());
+                        JSONObject userObj = json.getJSONObject("user");
+                        Toast.makeText(getContext(), "Login Successful", Toast.LENGTH_SHORT).show();
+
+                        openDashboardActivity();
+
+                    }catch (Exception ignore){
+
+                    }
+
+                }else{
+                    try{
+                        JSONObject json = new JSONObject(response.errorBody().string());
+                        Toast.makeText(getContext(), json.get("message").toString(), Toast.LENGTH_SHORT).show();
+                    }catch (Exception ignore){
+
+                    }
+
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.d("LoginF", t.toString());
+            }
+        });
+    }
+
+    public void openDashboardActivity() {
+        Intent intent = new Intent(getContext(), DashboardActivity.class);
+        startActivity(intent);
     }
 }

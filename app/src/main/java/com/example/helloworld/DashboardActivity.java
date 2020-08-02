@@ -19,8 +19,6 @@ public class DashboardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
-        getSupportActionBar().hide();
-
         medicalCard = (CardView) findViewById(R.id.medicalCard);
         medicalCard.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -21,33 +21,35 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        btnLst = (Button)findViewById(R.id.button);
-        btnLst.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openServiceProviderActivity();
-            }
-        });
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.main_framelayout, new LoginFragment());
 
-        btnDash = (Button)findViewById(R.id.button2);
-        btnDash.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openDashboardActivity();
-            }
-        });
+        ft.commit();
 
-        btnLogin = (Button)findViewById(R.id.btn_login);
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.d("MAIN", "onClick: ");
-                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.main_framelayout, new LoginFragment());
+//        btnLst = (Button)findViewById(R.id.button);
+//        btnLst.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                openServiceProviderActivity();
+//            }
+//        });
+//
+//        btnDash = (Button)findViewById(R.id.button2);
+//        btnDash.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                openDashboardActivity();
+//            }
+//        });
 
-                ft.commit();
-            }
-        });
+//        btnLogin = (Button)findViewById(R.id.btn_login);
+//        btnLogin.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Log.d("MAIN", "onClick: ");
+//
+//            }
+//        });
 
     }
 
