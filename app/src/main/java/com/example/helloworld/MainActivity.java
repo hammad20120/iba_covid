@@ -1,11 +1,13 @@
 package com.example.helloworld;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -36,10 +38,14 @@ public class MainActivity extends AppCompatActivity{
         });
 
         btnLogin = (Button)findViewById(R.id.btn_login);
-        btnDash.setOnClickListener(new View.OnClickListener() {
+        btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openDashboardActivity();
+                Log.d("MAIN", "onClick: ");
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.main_framelayout, new LoginFragment());
+
+                ft.commit();
             }
         });
 
