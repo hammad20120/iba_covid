@@ -1,45 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-    <TableRow
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="fill_parent"
-        android:layout_height="?android:attr/listPreferredItemHeight">
+<TableRow xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="?android:attr/listPreferredItemHeight"
+    >
 
-        <TextView
-            android:id="@+id/itemName"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_column="0"
-            android:layout_weight="4"
-            android:fontFamily="@font/open_sans"
-            android:gravity="center"
-            android:padding="8dp"
-            android:text="Masks"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+    <TextView
+        android:id="@+id/itemName"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_column="0"
+        android:layout_weight="4"
+        android:fontFamily="@font/open_sans"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="Masks"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:background="#ffffff"
+        android:layout_marginHorizontal=".5dp"
+        android:layout_marginBottom="1dp"/>
 
-        <TextView
-            android:id="@+id/itemQty"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_column="1"
-            android:layout_weight="3"
-            android:fontFamily="@font/open_sans"
-            android:gravity="center"
-            android:padding="8dp"
-            android:text="123"
-            android:textSize="18sp" />
+    <TextView
+        android:id="@+id/itemQty"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_column="1"
+        android:layout_weight="3"
+        android:fontFamily="@font/open_sans"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="123"
+        android:textSize="18sp"
+        android:background="#ffffff"
+        android:layout_marginHorizontal=".5dp"
+        android:layout_marginBottom="1dp"/>
 
-        <TextView
-            android:id="@+id/itemReq"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_column="2"
-            android:layout_weight="3"
-            android:fontFamily="@font/open_sans"
-            android:gravity="center"
-            android:padding="8dp"
-            android:text="YES"
-            android:textSize="18sp" />
-    </TableRow>
+    <TextView
+        android:id="@+id/itemReq"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_column="2"
+        android:layout_weight="3"
+        android:fontFamily="@font/open_sans"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="YES"
+        android:textSize="18sp"
+        android:background="#ffffff"
+        android:layout_marginHorizontal=".5dp"
+        android:layout_marginBottom="1dp"/>
+</TableRow>

@@ -1,12 +1,16 @@
 package com.example.helloworld;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.os.PersistableBundle;
+import android.util.Log;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -26,6 +30,13 @@ public class ServiceProvidersActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_service_providers);
 
+        LoadingDialog loadingDialog = new LoadingDialog(this);
+        loadingDialog.startLoadingDialog();
+
+
+
+
+
         getSupportActionBar().setTitle("Medical Facilities");
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -39,6 +50,7 @@ public class ServiceProvidersActivity extends AppCompatActivity {
         call.enqueue(new Callback<List<MedOrganization>>() {
             @Override
             public void onResponse(Call<List<MedOrganization>> call, Response<List<MedOrganization>> response) {
+                loadingDialog.dismissDialog();
                 if(response.isSuccessful()){
                    medOrgs = response.body();
                     recyclerView = findViewById(R.id.recyclerView);

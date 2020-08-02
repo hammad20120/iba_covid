@@ -52,7 +52,9 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/map_card"
-        app:layout_constraintVertical_weight="6">
+        app:layout_constraintVertical_weight="6"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="8dp">
 
         <TableRow
             android:layout_width="match_parent"
@@ -100,21 +102,29 @@
             android:layout_height="fill_parent"
             android:scrollbars="none"
            android:id="@+id/scrollV">
-            
-            <LinearLayout
+
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/scrollVewLinearLayout"
-                android:orientation="vertical">
-
-                <TableRow
+                app:cardCornerRadius="5dp"
+                >
+            
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:id="@+id/scrollVewLinearLayout"
+                    android:orientation="vertical"
+                    android:background="#e3dddc">
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
 
 
-                </TableRow>
+                    </TableRow>
 
-            </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
         </ScrollView>
     </TableLayout>
 
