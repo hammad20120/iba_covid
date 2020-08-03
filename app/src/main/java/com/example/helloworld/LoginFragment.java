@@ -29,6 +29,19 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class LoginFragment extends Fragment {
     private Button loginButton;
 
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        SessionManagement sessionManagement = new SessionManagement(getContext());
+        User user = sessionManagement.getSession();
+
+        if(user != null){
+            openDashboardActivity();
+        }
+
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -65,8 +78,12 @@ public class LoginFragment extends Fragment {
 
         User user = new User(null,email.getText().toString(), password.getText().toString(), -1);
 
+        loginServerRequest(user);
 
 
+    }
+
+    public void loginServerRequest(User user){
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(getResources().getString(R.string.server_url))
                 .addConverterFactory(GsonConverterFactory.create())
@@ -80,16 +97,7 @@ public class LoginFragment extends Fragment {
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if(response.isSuccessful()){
 
-                    try{
-                        JSONObject json = new JSONObject(response.body().string());
-                        JSONObject userObj = json.getJSONObject("user");
-                        Toast.makeText(getContext(), "Login Successful", Toast.LENGTH_SHORT).show();
-
-                        openDashboardActivity();
-
-                    }catch (Exception ignore){
-
-                    }
+                   serverSuccessResponse(response);
 
                 }else{
                     try{
@@ -110,8 +118,30 @@ public class LoginFragment extends Fragment {
         });
     }
 
+    public void serverSuccessResponse( Response<ResponseBody> response){
+        try{
+            JSONObject json = new JSONObject(response.body().string());
+            JSONObject userObj = json.getJSONObject("user");
+            Toast.makeText(getContext(), "Login Successful", Toast.LENGTH_SHORT).show();
+
+            User user = new User(userObj.get("id").toString(),userObj.get("name").toString(),
+                    userObj.getInt("role"), json.getString("token"));
+
+
+
+            SessionManagement sessionManagement = new SessionManagement(getContext());
+            sessionManagement.saveSession(user);
+            openDashboardActivity();
+
+        }catch (Exception ignore){
+
+        }
+    }
+
+
     public void openDashboardActivity() {
         Intent intent = new Intent(getContext(), DashboardActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
 }
