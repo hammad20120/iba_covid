@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Supplies Monitoring</string>
     <string name="supply_nmonitoring">Supply\nMonitoring</string>
-<!--    <string name="server_url">http://192.168.10.6:5000/api/</string>-->
+    <!--    <string name="server_url">http://192.168.10.6:5000/api/</string>-->
     <string name="server_url">https://still-springs-48682.herokuapp.com/api/</string>
     <string name="email">Email</string>
     <string name="password">Password</string>

@@ -2,6 +2,7 @@ package com.example.helloworld;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 public class SessionManagement {
     SharedPreferences sharedPreferences;
@@ -46,6 +47,6 @@ public class SessionManagement {
     }
 
     public void removeSession(){
-        editor.putInt(SESSION_KEY_ROLE,-1);
+        editor.putInt(SESSION_KEY_ROLE,-1).commit();
     }
 }

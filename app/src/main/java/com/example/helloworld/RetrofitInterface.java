@@ -14,6 +14,9 @@ public interface RetrofitInterface {
     @GET("medorgs/getDetails/")
     Call<List<MedOrganization>> getDetails();
 
+    @POST("medorgs/addOrganization/")
+    Call<ResponseBody> addOrganization(@Body MedOrganization medOrganization);
+
     @POST("users/register/")
     Call<ResponseBody> register(@Body User user);
 

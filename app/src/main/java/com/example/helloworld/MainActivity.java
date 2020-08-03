@@ -26,31 +26,6 @@ public class MainActivity extends AppCompatActivity{
 
         ft.commit();
 
-//        btnLst = (Button)findViewById(R.id.button);
-//        btnLst.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                openServiceProviderActivity();
-//            }
-//        });
-//
-//        btnDash = (Button)findViewById(R.id.button2);
-//        btnDash.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                openDashboardActivity();
-//            }
-//        });
-
-//        btnLogin = (Button)findViewById(R.id.btn_login);
-//        btnLogin.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Log.d("MAIN", "onClick: ");
-//
-//            }
-//        });
-
     }
 
     public void openDashboardActivity() {

@@ -8,13 +8,17 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.GridLayout;
 import android.widget.Toast;
 
 public class DashboardActivity extends AppCompatActivity {
 
     private CardView medicalCard;
     private CardView supplierCard;
+    private CardView orgCard;
+    private CardView logoutCard;
     private SessionManagement sessionManagement;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,9 +26,8 @@ public class DashboardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_dashboard);
 
         sessionManagement = new SessionManagement(this);
-        User user = sessionManagement.getSession();
+        user = sessionManagement.getSession();
 
-        Toast.makeText(this,user.getId().toString(),Toast.LENGTH_SHORT).show();
 
         medicalCard = (CardView) findViewById(R.id.medicalCard);
         medicalCard.setOnClickListener(new View.OnClickListener() {
@@ -42,6 +45,34 @@ public class DashboardActivity extends AppCompatActivity {
             }
         });
 
+        logoutCard = (CardView) findViewById(R.id.logoutCard);
+        logoutCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sessionManagement.removeSession();
+                openLandingPage();
+            }
+        });
+
+        orgCard = (CardView) findViewById((R.id.manageOrgsCard));
+        orgCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openManageOrgActivity();
+            }
+        });
+
+    }
+
+    public void openManageOrgActivity(){
+        Intent intent =  new Intent(this, ManageOrganiztionActivity.class);
+        startActivity(intent);
+    }
+
+    public void openLandingPage(){
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 
     public void openServiceProviderActivity(boolean isMedical){

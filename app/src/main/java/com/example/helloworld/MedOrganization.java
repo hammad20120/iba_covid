@@ -18,6 +18,12 @@ public class MedOrganization implements Parcelable {
 
     }
 
+    public MedOrganization(String name, Items[] items, Cordinates cordinates) {
+        this.name = name;
+        this.items = items;
+        this.cordinates = cordinates;
+    }
+
     public static final Creator<MedOrganization> CREATOR = new Creator<MedOrganization>() {
         @Override
         public MedOrganization createFromParcel(Parcel in) {
@@ -60,6 +66,11 @@ public class MedOrganization implements Parcelable {
 class Cordinates implements Parcelable{
     private double latitude;
     private double longitude;
+
+    public Cordinates(double latitude, double longitude) {
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
 
     protected Cordinates(Parcel in) {
         latitude = in.readDouble();
@@ -105,6 +116,12 @@ class Items implements Parcelable{
     private int qty;
     @SerializedName("borderLineVal")
     private int borderLineQty;
+
+    public Items(String name, int qty, int borderLineQty) {
+        this.name = name;
+        this.qty = qty;
+        this.borderLineQty = borderLineQty;
+    }
 
     protected Items(Parcel in) {
         name = in.readString();

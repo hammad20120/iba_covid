@@ -76,6 +76,7 @@ public class LoginFragment extends Fragment {
         EditText email = getView().findViewById(R.id.login_email);
         EditText password = getView().findViewById(R.id.login_password);
 
+
         User user = new User(null,email.getText().toString(), password.getText().toString(), -1);
 
         loginServerRequest(user);
@@ -95,6 +96,7 @@ public class LoginFragment extends Fragment {
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                Log.d("LoginF", "onResponse: "+response.code());
                 if(response.isSuccessful()){
 
                    serverSuccessResponse(response);
@@ -102,6 +104,7 @@ public class LoginFragment extends Fragment {
                 }else{
                     try{
                         JSONObject json = new JSONObject(response.errorBody().string());
+                        Log.d("LoginF", "onResponse: "+json.get("message").toString());
                         Toast.makeText(getContext(), json.get("message").toString(), Toast.LENGTH_SHORT).show();
                     }catch (Exception ignore){
 
