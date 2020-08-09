@@ -28,6 +28,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginFragment extends Fragment {
     private Button loginButton;
+    private LoadingDialog loadingDialog;
+    private Retrofit retrofit;
 
     @Override
     public void onStart() {
@@ -51,8 +53,12 @@ public class LoginFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        startServer();
         TextView registerText = (TextView) view.findViewById(R.id.registerText);
         loginButton = view.findViewById(R.id.loginbtn);
+        loadingDialog = new LoadingDialog(getActivity());
+
+
 
         registerText.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,6 +79,7 @@ public class LoginFragment extends Fragment {
     }
 
     private void loginUser(){
+        loadingDialog.startLoadingDialog("Logging in...");
         EditText email = getView().findViewById(R.id.login_email);
         EditText password = getView().findViewById(R.id.login_password);
 
@@ -84,8 +91,29 @@ public class LoginFragment extends Fragment {
 
     }
 
+    public void startServer(){
+        retrofit = new Retrofit.Builder()
+                .baseUrl("https://still-springs-48682.herokuapp.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        RetrofitInterface retInterface = retrofit.create(RetrofitInterface.class);
+        Call<ResponseBody> call = retInterface.getServer();
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
+    }
+
     public void loginServerRequest(User user){
-        Retrofit retrofit = new Retrofit.Builder()
+        retrofit = new Retrofit.Builder()
                 .baseUrl(getResources().getString(R.string.server_url))
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
@@ -112,11 +140,14 @@ public class LoginFragment extends Fragment {
 
 
                 }
+                loadingDialog.dismissDialog();
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Log.d("LoginF", t.toString());
+                Toast.makeText(getContext(), "Server not responding", Toast.LENGTH_SHORT).show();
+                loadingDialog.dismissDialog();
             }
         });
     }

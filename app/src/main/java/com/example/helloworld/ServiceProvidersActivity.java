@@ -31,7 +31,7 @@ public class ServiceProvidersActivity extends AppCompatActivity {
         setContentView(R.layout.activity_service_providers);
 
         LoadingDialog loadingDialog = new LoadingDialog(this);
-        loadingDialog.startLoadingDialog();
+        loadingDialog.startLoadingDialog("Loading...");
 
 
 

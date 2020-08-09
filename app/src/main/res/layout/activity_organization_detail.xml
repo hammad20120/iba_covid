@@ -79,7 +79,7 @@
                 android:gravity="center"
                 android:padding="8dp"
                 android:text="Qty."
-                android:textSize="24sp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -92,7 +92,7 @@
                 android:gravity="center"
                 android:padding="8dp"
                 android:text="Required"
-                android:textSize="24sp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
         </TableRow>

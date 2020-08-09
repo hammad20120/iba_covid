@@ -23,5 +23,8 @@ public interface RetrofitInterface {
     @POST("users/login/")
     Call<ResponseBody> login(@Body User user);
 
+    @GET("/")
+    Call<ResponseBody> getServer();
+
 
 }

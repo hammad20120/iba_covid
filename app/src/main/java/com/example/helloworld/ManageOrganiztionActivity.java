@@ -33,12 +33,14 @@ public class ManageOrganiztionActivity extends AppCompatActivity {
     private Button submitBtn;
     private int rowCount;
     private LinearLayout linearLayout;
+    private LoadingDialog loadingDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage_organiztion);
         linearLayout = findViewById(R.id.itemInsertLayout);
+        loadingDialog = new LoadingDialog(this);
 
         rowCount = 0;
 
@@ -70,6 +72,7 @@ public class ManageOrganiztionActivity extends AppCompatActivity {
 
 
     public void addOrganization() {
+        loadingDialog.startLoadingDialog("Adding Organization...");
         MedOrganization medOrganization = null;
         try {
             medOrganization = createOrganization();
@@ -89,6 +92,7 @@ public class ManageOrganiztionActivity extends AppCompatActivity {
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                loadingDialog.dismissDialog();
                 if (response.isSuccessful()) {
                     try {
                         JSONObject json = new JSONObject(response.body().string());
@@ -101,7 +105,7 @@ public class ManageOrganiztionActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-
+                loadingDialog.dismissDialog();
             }
         });
 
